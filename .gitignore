@@ -1,1 +1,3 @@
-support.html
+.vercel
+.env*
+*.png

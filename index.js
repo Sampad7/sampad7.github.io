@@ -1,3 +1,19 @@
+const PreLoader = document.querySelector('.loader-overlay'); // or '.loader' — must match your HTML
+
+window.onload = () => {
+    if (!PreLoader) {
+        console.error('Preloader element not found — check your selector matches the HTML class/id.');
+        return;
+    }
+    setTimeout(() => {
+        PreLoader.style.opacity = "0";
+        setTimeout(() => {
+            PreLoader.style.display = "none";
+        }, 1500);
+    }, 1500);
+};
+
+// animate(); ← delete this line entirely unless you've defined an animate() function
 
     const root = document.documentElement;
     const toggleBtn = document.getElementById("themeToggle");
@@ -103,23 +119,8 @@ navLinks.forEach(link => {
         this.classList.add('active');
     });
 });
-const slider = document.getElementById('scrollSlider');
+
 const textLines = document.querySelectorAll('.hero-desc');
 
-slider.addEventListener('input', (e) => {
-    const value = e.target.value;
-    
-    // Determine which text line to show based on slider progress (0-50% vs 50-100%)
-    let activeIndex = 0;
-    if (value > 50) {
-        activeIndex = 1;
-    }
 
-    textLines.forEach((line, index) => {
-        if (index === activeIndex) {
-            line.classList.add('active');
-        } else {
-            line.classList.remove('active');
-        }
-    });
-});
+// hero perticles

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PORTFOLIO</title>
-    
+     <script src="index.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
+        
         :root {
     --bg: #151714;
     --text: #F5F5F5;
@@ -30,7 +31,69 @@
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     transition: background 0.3s ease, color 0.3s ease;
+   
   }
+  .loader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    transition: opacity 0.5s ease;
+}
+.loader {
+    /* remove margin-left / margin-top, keep the rest */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    perspective: 800px;
+}
+
+.loader .loader-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.loader .loader-item:nth-child(1) {
+    border-bottom: 6px solid #3a83f1;
+    transform: rotateX(35deg) rotateY(-45deg);
+    animation: rotate-one 1s linear infinite;
+}
+
+.loader .loader-item:nth-child(2) {
+    border-right: 6px solid #4bc8eb;
+    transform: rotateX(50deg) rotateY(10deg);
+    animation: rotate-two 1s linear infinite;
+}
+
+.loader .loader-item:nth-child(3) {
+    border-top: 6px solid #11fbe0;
+    transform: rotateX(35deg) rotateY(55deg);
+    animation: rotate-three 1s linear infinite;
+}
+
+@keyframes rotate-one {
+    to {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-two {
+    to {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-three {
+    to {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
+}
+ 
   .header {
    position: fixed;
    top: 0;
@@ -50,6 +113,10 @@
     align-items: center;
     justify-content:center;
   }
+  
+   html{
+        scroll-behavior: smooth;
+    }
 
   /* fallback for reduced transparency / no backdrop-filter support */
   @media (prefers-reduced-transparency: reduce) {
@@ -77,7 +144,7 @@
   .nav-links a{
     text-decoration: none;
    color: #00ffff;
-    background: rgba(8, 8, 8, 0.12);
+    background: rgba(8, 8, 8, 0);
    
     padding: 8px ;
     transition: all 0.3s ease;
@@ -145,7 +212,7 @@
             font-size: 1.5rem;
             margin-left: 350px;
             margin-top: 20px;
-            color: #ffffff;
+            color:var(--text);
             white-space: nowrap;
         }
         .typing-wrapper {
@@ -240,7 +307,7 @@
     gap: 120px;
     margin-top: 60px;
 }
-.btn-p ,.btn-s {
+.btn-s {
     border-radius: 30px;
     text-decoration: none;
     padding: 10px 20px;
@@ -249,17 +316,94 @@
 .btn-p{
     background: linear-gradient(90deg, #00ffff, #00ccff);
     color: #000;
+    font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  
+ 
+  position: relative;
+  z-index: 0;
+  border-radius: 30px;
+  text-decoration: none;
+    
 }
 .btn-s{
-    background: transparent;
-    border: 2px solid #00ffff;
-
+    background: var(--bg);
+    
+    
+position: relative;
     color: #00ffff
 }
-.btn-p:hover, .btn-s:hover {
-    transform: translate(-6px);
-    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+
+.btn-p::before {
+   content: "";
+  background: linear-gradient(
+    190deg,
+    
+    #00FFD5, #0084ff
+  );
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-size: 180%;
+  z-index: -5;
+  width: calc(100% + 4px);
+  height:  calc(100% + 4px);
+  filter: blur(8px);
+  animation: glowing 10s linear infinite;
+  transition: opacity .3s ease-in-out;
+  border-radius: 20px;
+  opacity: 0;
 }
+@keyframes glowing {
+  0% {background-position: 0 0;}
+  50% {background-position: 300% 0;}
+  100% {background-position: 0 0;}
+}
+
+/* hover */
+.btn-p:hover::before {
+  opacity: 1;
+}
+
+.btn-p:active:after {
+  background: transparent;
+}
+
+.btn:active {
+  color: #000;
+  font-weight: bold;
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.btn-s::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), transparent 75% ,#00e5ff, #0084ff   );
+    opacity: 1;
+    top: -4px;
+    left: -4px;
+    border-radius: 20px;
+    padding: 1px ;
+    z-index: -1;
+    animation: rotate 4s linear infinite;
+    
+}
+@keyframes rotate{
+    0%{--angle:0deg;}
+    100%{--angle:360deg;}
+}
+
+
+
+ 
 .about-content {
     margin-top: 190px;
 }
@@ -344,6 +488,7 @@
 }
 .sec-sub{
     margin-left: -50px;
+    color: var(--text);
 }
 
     
@@ -365,83 +510,68 @@ margin-left: 700px;
 
 }
 .contact-box{
-    padding: 250px;
-    display: grid;
-    background: rgba(255, 255, 255, .025);
-   height: 100px;
-   width: 100px;
-    border-radius: 26px;
-    margin-left: 470px;
-    max-width: 200px;
+    margin-left: 570px;
+     position: relative;
+  z-index: 1;
+ width: 350px;
+  background: rgba(18, 18, 30, 0.005);
+  border: 0.1px solid #3d4a4d;
+  border-radius: 20px;
+  padding: 34px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #05e7f3;
 }
-.f-row{
-    display: flex;
-    flex-direction: column;
-    margin-top: -200px;
-    gap: 10px;
-    margin-left: -50px;
+.f-grp{
+ display: flex;
+ flex-direction: column;
+ gap:5px;
+}
+.f-grp input{
+    
+    height: 40px;
+  border: 1.5px solid rgba(255,255,255,.14);
+  border-radius: 30px;
+  padding: 0 14px;
+  font-size: 15px;
+  color: #eef0fa;
+  background: rgba(255,255,255,.04);
+  transition: border-color .18s,box-shadow .18s;
+}
+.f-grp input:focus{
+    border-color: #00ffff;
+  box-shadow: 0 0 0 4px rgba(0,255,255,.18);
+  outline: none;
+}
+.f-btn{
+    background: linear-gradient(90deg, #00ffff, #00ccff);
+    color: #000;
+    font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+ font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 0;
+  border-radius: 30px;
+  text-decoration: none;
+    
+}
 
+.f-btn:hover::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  background: linear-gradient(90deg, #00ffff, #00ccff);
+  border-radius: 30px;
+  z-index: -1;
+  top:0;
+  left:0;
+  filter: blur(8px);
 }
-.f-grp1{
-    margin-top: -30px;
-    margin-left: -50px;
-}
-.f-grp2{
-    margin-top: 5px;
-    margin-left: -50px;
-}
-label{
-    font-size: 1.6rem;
-}
-.f-grp input, .f-grp1 input{
-    padding: 10px;
-    padding-right: 20px;
-    border: 1px solid rgba(255, 255, 255, .025);
-    border-radius: 15px;
-    outline: none;
-    box-sizing: border-box;
-    background: rgba(255, 255, 255, .025);
-    color: #ffffff;
-   }
-   .f-grp textarea{
-    min-height: 100px;
-    resize: vertical;
-    padding: 10px;
-}
-.f-grp2 textarea{
-    min-height: 90px;
-    resize: vertical;
-    padding: 10px;
-    background: rgba(255, 255, 255, .025);
-     color: #ffffff;
-     border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, .025);
-}
-.f-grp2 input{
-    
-    padding: 10px;
-    padding-right: 20px;
-    border: 1px solid rgba(255, 255, 255, .025);
-    border-radius: 15px;
-    outline: none;
-    box-sizing: border-box;
-    background: rgba(255, 255, 255, .025);
-    color: #ffffff;
-    
-   }
-.f-btn {
-    margin-top: 10px;
-    margin-left: -50px;
-    background: rgba(3, 193, 240, 0.99);
-    color: #ffffff;
-    border: 1px solid rgba(3, 193, 240, 0.99);
-    border-radius: 15px;
-    padding: 15px 25px;
-}
-.f-btn:hover {
-     transform: translate(-6px);
-    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
-}
+
 .social-icon {
     color: var(--dim);
     font-size: 1.5rem;
@@ -455,15 +585,256 @@ label{
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.03);
 }
 .footer-link {
     color: var(--dim);
     text-decoration: none;
+    margin-left: 740px;
+}
+
+/* ---------- Tablet & below (<=1024px) ---------- */
+@media (max-width: 1024px) {
+    .header {
+        padding: 10px 20px;
+        justify-content: space-between;
+    }
+    .nav {
+        position: static;
+        margin-top: 0;
+        right: auto;
+    }
+    .nav-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+    }
+    .nav-links a {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+    .toggle {
+        position: static;
+    }
+ 
+    .hero-name {
+        flex-direction: column;
+        margin-top: 130px;
+        align-items: center;
+        text-align: center;
+    }
+    .hero-name .line1 {
+        margin-left: 0;
+        margin-top: 0;
+        font-size: 3rem;
+    }
+    .hero-name .line2 {
+        margin-left: 0;
+        margin-top: 10px;
+        font-size: 4.5rem;
+    }
+    .hero-desc1 {
+        margin-left: 0;
+        margin-top: 20px;
+        text-align: center;
+        white-space: normal;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 0 20px;
+    }
+    .hero-desc3 {
+        margin-left: 0;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .hero-btns {
+        margin-left: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+ 
+    .section-title,
+    .sec-head {
+        margin-left: 0;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .about-content {
+        margin-top: 100px;
+        text-align: center;
+    }
+    .about-photo img {
+        margin-left: 0;
+    }
+    .stats {
+        justify-self: center;
+        justify-content: center;
+        margin-left: 0;
+    }
+    .about-desc1,
+    .about-desc2,
+    .about-desc3 {
+        margin-left: 0;
+        margin-top: 20px;
+        padding: 0 20px;
+        text-align: center;
+    }
+ 
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        margin-left: 0;
+        padding: 0 20px;
+        justify-items: center;
+    }
+ 
+    .projects {
+        margin-left: 0;
+        padding: 0 20px;
+        text-align: center;
+    }
+    .grid img {
+        margin-left: 0;
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+ 
+    .social-links,
+    .footer-link,
+    .rights {
+        margin-left: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+    .rights {
+        display: block;
+        text-align: center;
+    }
+ 
+    .contact-box {
+        margin-left: 0;
+        width: auto;
+        height: auto;
+        max-width: 420px;
+        padding: 30px;
+        justify-self: center;
+        margin-inline: auto;
+    }
+    .f-row,
+    .f-grp1,
+    .f-grp2 {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    .f-btn {
+        margin-left: 0;
+    }
+}
+
+/* ---------- Phone (<=600px) ---------- */
+@media (max-width: 600px) {
+    .header {
+        padding: 8px 14px;
+    }
+    .logo {
+        font-size: 0.95rem;
+    }
+    .nav-links {
+        display: none;
+        gap: 8px;
+    }
+    .nav-links a {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+    }
+ 
+    .hero-name {
+        margin-top: 110px;
+    }
+    .hero-name .line1 {
+        font-size: 2.2rem;
+    }
+    .hero-name .line2 {
+        font-size: 2.8rem;
+    }
+    .hero-desc1 {
+        font-size: 1rem;
+        display: none;
+        
+        white-space: none;
+    }
+    .typing-wrapper {
+        width: 160px;
+        min-width: 160px;
+        margin-top: -10px;
+        display: none;
+         
+    }
+    .hero-desc3 {
+        font-size: 1rem;
+    }
+    .hero-btns {
+        gap: 15px;
+        margin-top: 30px;
+    }
+    .btn-p, .btn-s {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+ 
+    .section-title, .sec-title, .sec-head h2 {
+        font-size: 1.8rem;
+    }
+    .about-photo img {
+        height: 110px;
+        width: 110px;
+    }
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+ 
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 0 14px;
+    }
+ 
+    .section_title {
+        font-size: 1.8rem;
+    }
+    .grid img {
+        margin-top: 15px;
+    }
+ 
+    .contact-box {
+        max-width: 92%;
+        padding: 20px;
+    }
+    label {
+        font-size: 1.2rem;
+    }
+   .sec-sub{
+    margin-left: 10px;
+   }
+    
 }
     </style>
 </head>
 <body>
+<div class="loader-overlay" id="loaderOverlay">
+  <div class="loader">
+    <div class="loader-item"></div>
+    <div class="loader-item"></div>
+    <div class="loader-item"></div>
+  </div>
+</div>
+
      <div id="cur"></div>
     <div id="cur-dot"></div>
     <div id="progress"></div>
@@ -524,6 +895,7 @@ label{
         <di class="pip"></div>
        
     </div>
+     
     <!-- ════════ ABOUT ════════ -->
     <section id="about">
         <div class="about-content">
@@ -636,22 +1008,26 @@ label{
             <h2 class="sec-title">Let's <span>Connect</span></h2>
             <p class="sec-sub">Have a project? Let's solve it together.</p>
         </div>
-        <form id="contact-form" class="contact-box up">
-            <div class="f-row">
-                <div class="f-grp"><label>Your Name</label><input type="text" id="name" name="name"
+        <form id="contact-form" class="contact-box up" action="https://formspree.io/f/xljrddwp" method="POST">
+            
+                <div class="f-grp"><label>Your Name</label>
+                    <input type="text" id="name" name="name"
                         placeholder="sam" required>
                 </div>
-                <div class="f-grp"><label>Email Address</label><input type="email" id="email" name="email"
+                <div class="f-grp"><label>Email Address</label>
+                    <input type="email" id="email" name="email"
                         placeholder="sam@example.com" required>
                 </div>
             </div>
-              <div class="f-grp1"><label>Subject</label><input type="text" id="subject" name="subject"
+              <div class="f-grp"><label>Subject</label>
+                <input type="text" id="subject" name="subject"
                     placeholder="What's this about?" required>
               </div>
-              <div class="f-grp2"><label>Message</label><textarea id="message" name="message"
-                    placeholder="Tell me about your project..." required></textarea>
-               </div class="f-grp3">
-               <button type="submit" id="submit-btn" class="f-btn btn-m">Send Message &#9992;</button>
+              <div class="f-grp"><label>Message</label>
+                <input type="text" id="message" name="message"
+                    placeholder="Tell me about your project..." required>
+               </div>
+               <button type="submit" id="submit-btn" class="f-btn ">Send Message &#9992;</button>
         </form>
     </section>
     <footer>
@@ -694,12 +1070,13 @@ label{
             </a>
         </div>
     
-        <p><a href="support.html" class="footer-link"><strong>Support</strong></a> the developer.</p>
+        <p><a href="support.html" class="footer-link"><strong>Support</strong></a> </p>
     
         <p class="rights" style="margin-top:8px;font-size:.8rem">
             &copy; 2025 All Rights Reserved 
             
     </footer>
-  <script src="index.js"></script>      
+
+      
 </body>
 </html>
