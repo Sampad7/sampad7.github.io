@@ -2,7 +2,7 @@
 
 A personal portfolio website built with vanilla HTML, CSS, and JavaScript. It showcases who I am, my tech stack, my projects, and includes a contact section — with a dark/light theme toggle and smooth animated UI.
 
-🔗 **Live Demo:**https://portfolio-sampad18.vercel.app/
+🔗 **Live Demo:https://sampad7.github.io/
 
 
 ## ✨ Features
