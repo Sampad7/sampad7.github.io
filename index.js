@@ -45,7 +45,11 @@ window.onload = () => {
       label: "unqueue.",
       image: "Screenshot 2026-08-03 231455.png"
     },
-     
+     {
+      title: "PUSH-UPS FORM CHECKER",
+      label: "unqueue.",
+      image: "PUSHUPSS.png"
+    },
     {
       title: "SMART MENU FOR RESTAURANTS",
       label: "unqueue.",
@@ -54,7 +58,7 @@ window.onload = () => {
     {
       title: " COACHING CENTRE APP",
       label: "unqueue.",
-      image: "coaching.jpeg"
+      image: "coching.jpeg"
     },
     
   ];
