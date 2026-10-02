@@ -131,5 +131,3 @@ navLinks.forEach(link => {
 
 const textLines = document.querySelectorAll('.hero-desc');
 
-
-
