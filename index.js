@@ -50,7 +50,16 @@ window.onload = () => {
       label: "unqueue.",
       image: "PUSHUPSS.png"
     },
-    
+    {
+      title: "SMART MENU FOR RESTAURANTS",
+      label: "unqueue.",
+      image: "smartmneu.jpeg"
+    },
+    {
+      title: " COACHING CENTRE APP",
+      label: "unqueue.",
+      image: "coaching.jpeg"
+    },
     
   ];
  
@@ -123,4 +132,4 @@ navLinks.forEach(link => {
 const textLines = document.querySelectorAll('.hero-desc');
 
 
-// hero perticles
+
